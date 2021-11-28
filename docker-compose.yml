@@ -3,7 +3,7 @@ services:
   app:
     image: openjdk:15
     ports:
-      - 8080:8080
+      - 8071:8080
     tty: true
     volumes:
       - ./server:/srv:cached
