@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  app:
+    image: openjdk:15
+    ports:
+      - 8080:8080
+    tty: true
+    volumes:
+      - ./server:/srv:cached
+    working_dir: /srv
+    depends_on:
+      - db
+    networks:
+      - dbnet
+      
+  db:
+    container_name: spring_db
+    hostname: spring_mysql_host
+    image: "mysql:5.7"
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_USER: "springuser"
+      MYSQL_PASSWORD: "ThePassword"
+      MYSQL_DATABASE: "springDatabase"
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.conf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    networks:
+      - dbnet
+
+networks:
+  dbnet:

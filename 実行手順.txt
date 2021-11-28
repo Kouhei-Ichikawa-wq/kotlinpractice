@@ -1,0 +1,15 @@
+コマンドプロンプトを開く
+cd 作業フォルダ(作業フォルダがない場合は作成する)
+git clone https://github.com/you2143/SpringKotlin.git
+cd SpringKotlin
+docker-compose up -d
+docker-compose exec app bash
+
+## 開発環境の場合
+sh gradlew bootRun
+「http://localhost:8080/」へアクセス
+
+## 本番環境の場合
+sh gradlew build
+java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
+「http://localhost:8080/」へアクセス
